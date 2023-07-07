@@ -10,18 +10,19 @@ const cors = require('cors');
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
-
-// front-end url
-app.use(cors({
+// Front-end URLs for local development and production
+const allowedOrigins = [
+    'http://127.0.0.1:5173',
+    'https://master--hotelhaven.netlify.app'
+  ];
+  
+  app.use(cors({
     credentials: true,
-    // origin: ['http://127.0.0.1:5173']
-    origin: ['https://master--hotelhaven.netlify.app/']
-    
-}));
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5173');
-    res.setHeader('Access-Control-Allow-Origin', 'https://master--hotelhaven.netlify.app');
+    origin: allowedOrigins
+  }));
+  
+  app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', allowedOrigins.join(', '));
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
