@@ -7,6 +7,7 @@ export default function Home() {
     useEffect(() => {
         axios.get('/account/places').then(response => {
             setPlaces([...response.data, ...response.data]);
+            console.log(process.env.REACT_APP_BACKEND_URL);
         })
     }, []);
     return (
@@ -19,7 +20,7 @@ export default function Home() {
                     <Link to={'/account/viewPlace/' + place._id} key={place}>
                         <div className="mb-2 bg-gray-500 rounded-2xl ">
                             {place.photos?.[0] && (
-                                <img className="rounded-2xl object-cover aspect-square" src={'https://hotelhaven.onrender.com/uploads/' + place.photos[0]} />
+                                <img className="rounded-2xl object-cover aspect-square" src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${place.photos[0]}`}  />
                             )}
                         </div>
                         <h3 className="font-semibold">{place.address}</h3>
