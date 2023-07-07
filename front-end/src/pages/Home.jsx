@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+
 export default function Home() {
     const [places, setPlaces] = useState([]);
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+
     useEffect(() => {
         axios.get('/account/places').then(response => {
             setPlaces([...response.data, ...response.data]);
-            console.log(process.env.REACT_APP_BACKEND_URL);
+            console.log(apiUrl);
         })
     }, []);
     return (
@@ -20,7 +24,7 @@ export default function Home() {
                     <Link to={'/account/viewPlace/' + place._id} key={place}>
                         <div className="mb-2 bg-gray-500 rounded-2xl ">
                             {place.photos?.[0] && (
-                                <img className="rounded-2xl object-cover aspect-square" src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${place.photos[0]}`}  />
+                                <img className="rounded-2xl object-cover aspect-square" src={`${apiUrl}/uploads/${place.photos[0]}`}  />
                             )}
                         </div>
                         <h3 className="font-semibold">{place.address}</h3>

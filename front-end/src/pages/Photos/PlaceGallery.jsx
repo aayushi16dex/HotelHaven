@@ -13,6 +13,7 @@ const restImg = {
 export default function PlaceGallery({ place }) {
 
     const [showAllPhotos, setShowAllPhotos] = useState(false);
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     if (showAllPhotos) {
         return (
@@ -34,7 +35,7 @@ export default function PlaceGallery({ place }) {
                     <div className="grid lg:grid-cols-2 gap-3 mx-60 md:grid-cols-1 sm:grid-cols-1">
                         {place?.photos?.length > 0 && place.photos.map(photo => (
                             <div >
-                                <img style={firstImg} src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${photo}`} />
+                                <img style={firstImg} src={`${apiUrl}/uploads/${photo}`} />
                             </div>
                         ))}
                     </div>
@@ -51,17 +52,17 @@ export default function PlaceGallery({ place }) {
                 <div onClick={() => setShowAllPhotos(true)} className="cursor-pointer gap-3 grid lg:grid-cols-[2fr_1fr] md:grid-cols-[2fr_1fr] sm:grid-cols-[2fr_1fr]  mt-3">
 
                     {place.photos?.[0] && (
-                        <img style={firstImg} className="object-cover rounded-s-2xl" src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${place.photos[0]}`} />
+                        <img style={firstImg} className="object-cover rounded-s-2xl" src={`${apiUrl}/uploads/${place.photos[0]}`} />
                     )}
                     <div className="relative">
                         <div>
                             {place.photos?.[1] && (
-                                <img style={restImg} className="object-cover mb-2 rounded-se-2xl" src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${place.photos[1]}`} />
+                                <img style={restImg} className="object-cover mb-2 rounded-se-2xl" src={`${apiUrl}/uploads/${place.photos[1]}`} />
                             )}
                         </div>
                         <div className=" overflow-hidden">
                             {place.photos?.[2] && (
-                                <img style={restImg} className=" object-cover rounded-ee-2xl" src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${place.photos[2]}`} />
+                                <img style={restImg} className=" object-cover rounded-ee-2xl" src={`${apiUrl}/uploads/${place.photos[2]}`} />
                             )}
                         </div>
                         <button onClick={() => setShowAllPhotos(true)} className="flex gap-1 absolute bottom-3 right-3 rounded-md p-1 bg-white border-blue-950 border-5">
