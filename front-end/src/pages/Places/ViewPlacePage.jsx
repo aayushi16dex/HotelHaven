@@ -58,10 +58,6 @@ export default function ViewPlacePage() {
 
                         </div>
 
-
-
-
-
                     </div>
                 </div>
             ) : (

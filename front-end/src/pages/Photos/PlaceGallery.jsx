@@ -51,17 +51,17 @@ export default function PlaceGallery({ place }) {
                 <div onClick={() => setShowAllPhotos(true)} className="cursor-pointer gap-3 grid lg:grid-cols-[2fr_1fr] md:grid-cols-[2fr_1fr] sm:grid-cols-[2fr_1fr]  mt-3">
 
                     {place.photos?.[0] && (
-                        <img style={firstImg} className="object-cover rounded-s-2xl" src={"http://localhost:5000/uploads/" + place.photos[0]} />
+                        <img style={firstImg} className="object-cover rounded-s-2xl" src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${place.photos[0]}`} />
                     )}
                     <div className="relative">
                         <div>
                             {place.photos?.[1] && (
-                                <img style={restImg} className="object-cover mb-2 rounded-se-2xl" src={"http://localhost:5000/uploads/" + place.photos[1]} />
+                                <img style={restImg} className="object-cover mb-2 rounded-se-2xl" src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${place.photos[1]}`} />
                             )}
                         </div>
                         <div className=" overflow-hidden">
                             {place.photos?.[2] && (
-                                <img style={restImg} className=" object-cover rounded-ee-2xl" src={"http://localhost:5000/uploads/" + place.photos[2]} />
+                                <img style={restImg} className=" object-cover rounded-ee-2xl" src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${place.photos[2]}`} />
                             )}
                         </div>
                         <button onClick={() => setShowAllPhotos(true)} className="flex gap-1 absolute bottom-3 right-3 rounded-md p-1 bg-white border-blue-950 border-5">
