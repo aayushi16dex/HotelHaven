@@ -14,7 +14,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 // front-end url
 app.use(cors({
     credentials: true,
-    origin: ['http://127.0.0.1:5173']
+    // origin: ['http://127.0.0.1:5173']
+    origin: ['https://master--hotelhaven.netlify.app/']
 }));
 
 //connect db

@@ -13,7 +13,9 @@ import ViewPlacePage from "./pages/Places/ViewPlacePage"
 import MyBookingsPage from "./pages/Bookings/MyBookingsPage"
 import ViewBookingPage from "./pages/Bookings/ViewBookingPage"
 
-axios.defaults.baseURL = "http://127.0.0.1:5000";
+// axios.defaults.baseURL = "http://127.0.0.1:5000";
+axios.defaults.baseURL = "https://hotelhavenbackend.netlify.app/";
+
 axios.defaults.withCredentials = true;
 
 function App() {
