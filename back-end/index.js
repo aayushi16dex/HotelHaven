@@ -12,12 +12,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 
 // front-end url
-// app.use(cors({
+app.use(cors({
     credentials: true,
     // origin: ['http://127.0.0.1:5173']
-    // origin: ['https://master--hotelhaven.netlify.app/']
+    origin: ['https://master--hotelhaven.netlify.app/']
     
-// }));
+}));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://master--hotelhaven.netlify.app');
