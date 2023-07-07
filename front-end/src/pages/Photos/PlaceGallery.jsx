@@ -34,7 +34,7 @@ export default function PlaceGallery({ place }) {
                     <div className="grid lg:grid-cols-2 gap-3 mx-60 md:grid-cols-1 sm:grid-cols-1">
                         {place?.photos?.length > 0 && place.photos.map(photo => (
                             <div >
-                                <img style={firstImg} src={"http://localhost:5000/uploads/" + photo} />
+                                <img style={firstImg} src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${photo}`} />
                             </div>
                         ))}
                     </div>

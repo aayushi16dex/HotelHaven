@@ -5,6 +5,6 @@ export default function PlaceImage({place, index=0, className=null }){
     }
 
     return (
-        <img className={className} src={"http://localhost:5000/uploads/" + place.photos[index]} alt="" />
+        <img className={className} src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${place.photos[index]}`} alt="" />
     )
 }

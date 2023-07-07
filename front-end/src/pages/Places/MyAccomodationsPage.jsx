@@ -36,7 +36,7 @@ export default function PlacesPage() {
                         <Link to={'/account/places/' + place._id} key={place} className="flex mb-8 gap-4 shadow-xl border-t-2 p-4 rounded-2xl">
                             <div className="flex w-32 h-32 bg-gray-500 shrink-0 rounded-full">
                                 {place.photos.length && (
-                                    <img className="object-cover w-32 h-32 shadow-xl rounded-full " src={'http://localhost:5000/uploads/'+place.photos[0]} alt=""/>
+                                    <img className="object-cover w-32 h-32 shadow-xl rounded-full " src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${place.photos[0]}`} alt=""/>
                                 )}
                             </div>
 
