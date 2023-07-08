@@ -20,9 +20,7 @@ export default function PlaceDescription({ place }) {
                     {place.perks.length === 1 && (
                         <h2 className="text-base">This place does not offer any perks</h2>
                     )}
-                    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  ">
-
-
+                    <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1  ">
                         {place.perks.length > 0 && place.perks.map(perk => (
                             <div>
                                 <DisplayPerks perk={perk} />
