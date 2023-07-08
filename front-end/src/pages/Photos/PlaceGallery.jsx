@@ -18,7 +18,7 @@ export default function PlaceGallery({ place }) {
     if (showAllPhotos) {
         return (
             <div>
-                <div className="absolute bg-white top-0 right-0 left-0 min-h-full min-w-screen">
+                <div className="absolute bg-white pb-72 top-0 right-0 left-0 min-h-full min-w-screen">
                     <div className="p-8 grid gap-4">
                         <h2 className="text-3xl flex gap-2 justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mt-2">
