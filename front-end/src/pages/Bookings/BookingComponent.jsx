@@ -22,8 +22,8 @@ export default function BookingComponent({ place }) {
         if (checkIn === "" || checkOut === "" ) {
             alert("Fill the booking details!");
         }
-        else if (numOfNights < 0){
-            alert("Oops! Dates Mismatch: Check-in > Check-out");
+        else if (numOfNights <= 0){
+            alert("Oops! Dates Mismatch: Check-in >= Check-out");
         }
         else if (CheckInDate < 0){
             alert("Oops! Check-in Date has passed");
@@ -35,8 +35,16 @@ export default function BookingComponent({ place }) {
                 totalPrice: numOfNights * place.price * numOfGuests
             };
             const response = await axios.post('/account/bookingPlace', data);
-            const bookingId = response.data._id;
-            setRedirect('/account/bookings/' + bookingId);
+            if (response.data.msg === "User not found"){
+                alert("Login before booking!")
+                setRedirect('/login');
+            }
+            else{
+                const bookingId = response.data._id;
+                setRedirect('/account/bookings/' + bookingId);
+
+            }
+           
         }
     }
 

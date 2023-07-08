@@ -13,7 +13,6 @@ export default function MybookingsPage() {
             setbookings(response.data);
         })
     }, []);
-    console.log(bookings);
     return (
         <div>
             <AccountNav />
@@ -39,9 +38,6 @@ export default function MybookingsPage() {
                 {bookings?.length > 0 && bookings.map(booking => (
 
                     <Link to={'/account/bookings/' + booking._id} className="mb-6 flex gap-4 shadow-md mx-40 border rounded-2xl overflow-hidden">
-                        {/* <div className="h-36 w-64">
-                            <PlaceImage place={booking.placeId} />
-                        </div> */}
                         <div className="flex w-64 h-36 bg-gray-500 shrink-0">
                             {booking.placeId.photos.length && (
                                 <PlaceImage place={booking.placeId} />

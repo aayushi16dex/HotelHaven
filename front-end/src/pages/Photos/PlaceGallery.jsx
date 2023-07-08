@@ -55,12 +55,14 @@ export default function PlaceGallery({ place }) {
                         <img style={firstImg} className="object-cover rounded-s-2xl" src={`${apiUrl}/uploads/${place.photos[0]}`} />
                     )}
                     <div className="relative">
-                        <div>
+
+                        <div style={restImg} className="flex bg-gray-500 shrink-0 mb-2">
                             {place.photos?.[1] && (
-                                <img style={restImg} className="object-cover mb-2 rounded-se-2xl" src={`${apiUrl}/uploads/${place.photos[1]}`} />
+                                <img style={restImg} className="object-cover rounded-se-2xl" src={`${apiUrl}/uploads/${place.photos[1]}`} />
                             )}
                         </div>
-                        <div className=" overflow-hidden">
+
+                        <div style={restImg} className=" overflow-hidden flex bg-gray-500 shrink-0">
                             {place.photos?.[2] && (
                                 <img style={restImg} className=" object-cover rounded-ee-2xl" src={`${apiUrl}/uploads/${place.photos[2]}`} />
                             )}

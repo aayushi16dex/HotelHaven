@@ -1,5 +1,6 @@
 import DisplayPerks from "../PlacePerks/DisplayPerks";
 export default function PlaceDescription({ place }) {
+
     return (
         <>
             <div className="mx-40">
@@ -16,9 +17,14 @@ export default function PlaceDescription({ place }) {
                 <div className="my-4 ">
                     <h2 className="font-semibold text-2xl mb-2">What this place offers</h2>
 
+                    {place.perks.length === 1 && (
+                        <h2 className="text-base">This place does not offer any perks</h2>
+                    )}
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1  ">
-                        {place?.perks?.length > 0 && place.perks.map(perk => (
-                            <div className="">
+
+
+                        {place.perks.length > 0 && place.perks.map(perk => (
+                            <div>
                                 <DisplayPerks perk={perk} />
                             </div>
                         ))}

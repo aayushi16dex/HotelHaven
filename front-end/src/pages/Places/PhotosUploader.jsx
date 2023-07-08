@@ -8,11 +8,17 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
 
     async function addPhotoByLink(e) {
         e.preventDefault();
-        const { data: filename } = await axios.post('account/upload-by-link', { link: photoLink });
-        onChange(prev => {
-            return [...prev, filename];
-        })
-        setPhotoLink('');
+        if (!photoLink) {
+            alert("Add a suitable link");
+
+        }
+        else {
+            const { data: filename } = await axios.post('account/upload-by-link', { link: photoLink });
+            onChange(prev => {
+                return [...prev, filename];
+            })
+            setPhotoLink('');
+        }
     }
 
     function uploadPhotoFromDevice(e) {
