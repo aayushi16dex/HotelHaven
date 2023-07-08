@@ -18,6 +18,24 @@ export default function MybookingsPage() {
         <div>
             <AccountNav />
             <div>
+                {bookings.length === 0 && (
+                    <div>
+                        <div className="text-center">
+                            <h1 className="text-2xl mb-5">No hotels booked yet!</h1>
+                            <h3 className="text-lg">Unleash your wanderlust and set your sights on new horizons.</h3>
+                            <h3 className="text-lg">It's time to plan your next epic adventure!</h3>
+                        </div>
+                        <Link to={'/account/places'} >
+                            <button className="px-7 py-2 text-base flex gap-2 justify-center mx-auto mt-12 border-primary bg-primary text-white rounded-3xl">
+                                <div className="text-lg"> Search hotels</div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-lg mt-0.5">
+                                    <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                        </Link>
+                    </div>
+                )}
+                
                 {bookings?.length > 0 && bookings.map(booking => (
 
                     <Link to={'/account/bookings/' + booking._id} className="mb-6 flex gap-4 shadow-md mx-40 border rounded-2xl overflow-hidden">
