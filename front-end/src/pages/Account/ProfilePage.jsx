@@ -7,7 +7,7 @@ import PlacesPage from "../Places/MyAccomodationsPage";
 import AccountNav from "./AccountNav";
 
 export default function AccountPage() {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const apiUrl = import.meta.env.VITE_BACKEND_URL
     const { ready, user, setUser } = useContext(UserContext);
     const [redirect, setRedirect] = useState(null);
     let { subpage } = useParams();  //hook
@@ -41,10 +41,10 @@ export default function AccountPage() {
                 <div className="text-center max-w-lg mx-auto">
             
                    {user.gender === 'male' && (
-                        <img className="h-44 mx-auto -mt-6 mb-3 " src=  "/src/assets/images/maleUser.jpg" alt="user" />
+                        <img className="h-44 mx-auto -mt-6 mb-3 " src={`${apiUrl}/images/maleUser.jpg}`} alt="" />
                     )}
                     {user.gender === 'female' && (
-                        <img className="h-44 mx-auto -mt-6 mb-3 border-gray-500" src="/src/assets/images/femaleUser.jpg" alt="user" />
+                        <img className="h-44 mx-auto -mt-6 mb-3 border-gray-500" src={`${apiUrl}/images/femaleUser.jpg}`}  alt="" />
                     )}
              
                 
