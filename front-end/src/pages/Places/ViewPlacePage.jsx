@@ -52,7 +52,7 @@ export default function ViewPlacePage() {
 
                             {place.ownerGender === "female" && (
                                 <div className="ml-3">
-                                    <img className=" mb-3 h-32 w-32 border-4 pt-2 border-gray-500 rounded-full" src={`${apiUrl}/uplaods/femaleHost.jpg`} alt="user" />
+                                    <img className=" mb-3 h-32 w-32 border-4 pt-2 border-gray-500 rounded-full" src={`${apiUrl}/uploads/femaleHost.jpg`} alt="user" />
                                     <p className=" flex text-gray-600"> Hosted by  {place.ownerName}</p>
                                 </div>
                             )}
