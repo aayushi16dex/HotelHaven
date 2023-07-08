@@ -6,16 +6,14 @@ import { Link } from "react-router-dom";
 export default function Home() {
     const [places, setPlaces] = useState([]);
     const apiUrl = import.meta.env.VITE_API_URL;
-
-
     useEffect(() => {
         axios.get('/account/places').then(response => {
-            setPlaces([...response.data, ...response.data]);
+            setPlaces([...response.data]);
         })
     }, []);
     return (
         <>
-            <div className="mt-5 text-xl justify-center flex">
+           <div className="mt-5 text-xl justify-center flex">
                 "Unlocking the world one hotel at a time - empowering users to choose their dream destinations for unforgettable stays."
             </div>
             <div className="mt-5 gap-x-6 gap-y-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
