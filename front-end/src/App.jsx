@@ -14,8 +14,7 @@ import MyBookingsPage from "./pages/Bookings/MyBookingsPage"
 import ViewBookingPage from "./pages/Bookings/ViewBookingPage"
 
 // back-end url
-// axios.defaults.baseURL = "http://127.0.0.1:5000";
-axios.defaults.baseURL = "https://hotelhaven.onrender.com/";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 axios.defaults.withCredentials = true;
 

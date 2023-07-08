@@ -33,10 +33,10 @@ export default function Login() {
                 await axios.post("/auth/login", {
                     email,
                     password
-                });
-                alert("Login successful!");
+                });      
                 setRedirect(true);
                 fetchUserName();
+                alert("Login successful!");
             }
             catch (e) {
                 if (e.response.data.msg === "Invalid credentials"){
@@ -53,9 +53,15 @@ export default function Login() {
     }
  
     async function fetchUserName(){
-        await axios.get('/auth/profile').then(({data}) => {
-            setUser(data);
-        });
+        try{
+            await axios.get('/auth/profile').then(({data}) => {
+                setUser(data);
+                console.log({data});
+            });
+        }
+        catch(e){
+            console.log(e);
+        }
     }
 
     if (redirect) {

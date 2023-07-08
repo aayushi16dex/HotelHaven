@@ -71,8 +71,7 @@ authController.get('/profile', (req, res) => {
         });   
     }
     else{
-        res.json(null);
-        
+        res.status(404).json("No token"); 
     }
 })
 

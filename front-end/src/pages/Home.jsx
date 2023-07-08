@@ -11,7 +11,6 @@ export default function Home() {
     useEffect(() => {
         axios.get('/account/places').then(response => {
             setPlaces([...response.data, ...response.data]);
-            console.log(apiUrl);
         })
     }, []);
     return (
