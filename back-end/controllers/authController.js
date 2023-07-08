@@ -81,7 +81,19 @@ authController.get('/profile', (req, res) => {
 
 // log out
 authController.post('/logout', (req, res) => {
-    res.cookie('token','').json("Logged out");
+    // res.cookie('token','').json("Logged out");
+    // res.cookie('token','',{
+    //     httpOnly: true,
+    //     secure: true,
+    //     sameSite: 'None',
+    //     expires: new Date(0)
+    //   });
+
+    res.clearCookie('token',{
+        httpOnly: true,
+        secure: true,
+        sameSite: 'None',
+    }).status(200).json("Logged out");
 })
 
 // create token fnc

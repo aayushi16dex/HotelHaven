@@ -27,9 +27,7 @@ export default function Login() {
 
     async function loginUser(e) {
         e.preventDefault(); //prevents reloading of page
-        const validation = validateForm();
-        console.log(validation);
-        if (validation) {
+        if (validateForm()) {
             try {
                 await axios.post("/auth/login", {
                     email,

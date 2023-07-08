@@ -16,11 +16,15 @@ export default function AccountPage() {
         subpage = 'profile';
     }
 
-    if (!ready) {
-        return 'Loading......';
-    }
+    // console.log(user);
+    // if (!ready) {
+    //     return 'Loading......';
+    // }
 
-    if (ready && !user && !redirect) {
+    // if (ready && !user && !redirect) {
+    //     return <Navigate to={'/login'} />
+    // }
+    if ( !user && !redirect) {
         return <Navigate to={'/login'} />
     }
 
@@ -28,6 +32,7 @@ export default function AccountPage() {
         await axios.post('/auth/logout');
         setRedirect('/');
         setUser(null);
+        alert("You have been logged out!")
     }
 
     if (redirect) {
