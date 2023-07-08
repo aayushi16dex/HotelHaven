@@ -7,6 +7,7 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
+    const [ready, setReady] = useState(false);
     const { setUser } = useContext(UserContext);
     const [errors, setErrors] = useState({});
 
@@ -56,6 +57,7 @@ export default function Login() {
         try{
             await axios.get('/auth/profile').then(({data}) => {
                 setUser(data);
+                setReady(true);
                 console.log({data});
             });
         }
