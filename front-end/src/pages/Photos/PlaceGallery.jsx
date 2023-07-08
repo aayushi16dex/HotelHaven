@@ -49,7 +49,7 @@ export default function PlaceGallery({ place }) {
             <div className="mx-40">
                 {/* Place images */}
                 {/* first column is assigned twice the width of second column. */}
-                <div onClick={() => setShowAllPhotos(true)} className="cursor-pointer gap-3 grid lg:grid-cols-[2fr_1fr] md:grid-cols-[2fr_1fr] sm:grid-cols-[2fr_1fr]  mt-3">
+                <div onClick={() => setShowAllPhotos(true)} className="cursor-pointer gap-2 grid lg:grid-cols-[2fr_1fr] md:grid-cols-[2fr_1fr] sm:grid-cols-[2fr_1fr]  mt-3">
 
                     {place.photos?.[0] && (
                         <img style={firstImg} className="object-cover rounded-s-2xl" src={`${apiUrl}/uploads/${place.photos[0]}`} />
