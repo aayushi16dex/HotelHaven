@@ -52,7 +52,11 @@ authController.post('/login', async(req, res) => {
         const token = createToken(others)
 
         // 200: Everything is okay
-        return res.cookie('token',token ).status(200).json({others, token})
+        return res.cookie('token',token,{
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None'
+          }).status(200).json({others, token})
     }
     catch(error){
         return res.status(500).json(error.message)
