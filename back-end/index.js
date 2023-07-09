@@ -13,7 +13,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 // Front-end URLs for local development and production
 const allowedOrigins = [
     'http://127.0.0.1:5173',
-    'https://master--hotelhaven.netlify.app'
+    'https://hotelhaven.netlify.app/'
   ];
   
   app.use(cors({
