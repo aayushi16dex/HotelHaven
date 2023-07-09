@@ -30,7 +30,7 @@ authController.post('/register', async(req,res) => {
         return res.status(500).json(error.message)
     }
 })
-
+ 
 //login
 authController.post('/login', async(req, res) => {
     try{
@@ -81,13 +81,6 @@ authController.get('/profile', (req, res) => {
 
 // log out
 authController.post('/logout', (req, res) => {
-    // res.cookie('token','').json("Logged out");
-    // res.cookie('token','',{
-    //     httpOnly: true,
-    //     secure: true,
-    //     sameSite: 'None',
-    //     expires: new Date(0)
-    //   });
 
     res.clearCookie('token',{
         httpOnly: true,

@@ -3,7 +3,7 @@ const Place = require('../models/placeModel')
 const Booking = require('../models/bookingModel');
 const User = require('../models/userModel')
 const imageDownloader = require('image-downloader');
-const jwt = require('jsonwebtoken') 
+const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser');
 accountController.use(cookieParser());
 const path = require('path');
@@ -47,116 +47,128 @@ accountController.post('/upload-from-device', photosMiddleware.array('photos', 1
 
 // adding place by owner
 accountController.post('/addPlace', async (req, res) => {
-   try{
-    console.log(req.body.title);
-    const { token } = req.cookies;
-    const { title, type, address, addedPhotos,
-        description, perks, checkIn,
-        checkOut, maxGuests, price } = req.body;
-    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
-        if (err) throw err;
-        const placeDoc = await Place.create({
-            owner: userData.id,
-            // owner: "fe3evffvfde",
-            title, type, address, 
-            photos: addedPhotos,
+    try {
+        const { token } = req.cookies;
+        const { title, type, address, addedPhotos,
             description, perks, checkIn,
-            checkOut, maxGuests,price
+            checkOut, maxGuests, price } = req.body;
+        jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
+            if (err) throw err;
+            const placeDoc = await Place.create({
+                owner: userData.id,
+                title, type, address,
+                photos: addedPhotos,
+                description, perks, checkIn,
+                checkOut, maxGuests, price
+            });
+            res.json(placeDoc);
         });
-        res.json(placeDoc);
-    });
-   }
+    }
 
-   catch(e){
-    res.json(e);
-    
-   }
+    catch (e) {
+        res.json(e);
+
+    }
 });
 
 // get places of a particular user
-accountController.get("/user-places", (req,res) => {
+accountController.get("/user-places", (req, res) => {
     const { token } = req.cookies;
 
     jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
-        const {id} = userData;
-        res.json(await Place.find({owner:id}));
+        const { id } = userData;
+        res.json(await Place.find({ owner: id }));
     });
 })
 
 // get all places
-accountController.get("/places", async (req,res) => {
+accountController.get("/places", async (req, res) => {
     res.json(await Place.find());
 })
 
 // get a particular place
-accountController.get("/place/:id", async (req,res) => {
-    const {id} = req.params;
+accountController.get("/place/:id", async (req, res) => {
+    const { id } = req.params;
     const placeDoc = await Place.findById(id);
     const owner = await User.findById(placeDoc.owner);
     const ownerName = owner.username;
     const ownerGender = owner.gender;
-    res.json({placeDoc, ownerName, ownerGender});
+    res.json({ placeDoc, ownerName, ownerGender });
 })
 
 // update place of a particular user
 accountController.put('/updatePlace', async (req, res) => {
-    try{
-     const { token } = req.cookies;
-     const { id, title, type, address, addedPhotos,
-         description, perks, checkIn,
-         checkOut, maxGuests, price } = req.body;
-     jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
-         if (err) throw err;
-         const placeDoc = await Place.findById(id);
-         if (placeDoc.owner.toString() == userData.id){
-            placeDoc.set({
-                title, type, address, 
-                photos: addedPhotos,
-                description, perks, checkIn,
-                checkOut, maxGuests, price
-            })
-         }
-         await placeDoc.save();
-         res.status(200).json(placeDoc);  
-     });
-    }
- 
-    catch(e){
-     res.json(e);    
-    }
- });
-
- // book a place
- accountController.post('/bookingPlace', async (req,res) => {
-    const userData = await getUserDataFromReq(req);
-    const {
-        placeId, checkIn, checkOut, numOfGuests, totalPrice
-    } = req.body;
-    Booking.create({
-        placeId, checkIn, checkOut, numOfGuests, totalPrice,
-        userId: userData.id
-    }).then((bookingDoc) => {
-        res.status(200).json(bookingDoc);
-    }).catch((err) =>{
-        throw err;
-    })
- });
- 
- // get all bookings of a user
- accountController.get('/bookings', async (req,res) => {
-    const userData = await getUserDataFromReq(req);
-    res.json(await Booking.find({userId:userData.id}).populate("placeId"));
- }) 
-
-
- function getUserDataFromReq(req){
-    return new Promise((resolve, reject) =>{
-        jwt.verify(req.cookies.token, process.env.JWT_SECRET, {}, async (err, userData) => {
+    try {
+        const { token } = req.cookies;
+        const { id, title, type, address, addedPhotos,
+            description, perks, checkIn,
+            checkOut, maxGuests, price } = req.body;
+        jwt.verify(token, process.env.JWT_SECRET, {}, async (err, userData) => {
             if (err) throw err;
-            resolve(userData);
+            const placeDoc = await Place.findById(id);
+            if (placeDoc.owner.toString() == userData.id) {
+                placeDoc.set({
+                    title, type, address,
+                    photos: addedPhotos,
+                    description, perks, checkIn,
+                    checkOut, maxGuests, price
+                })
+            }
+            await placeDoc.save();
+            res.status(200).json(placeDoc);
+        });
+    }
+
+    catch (e) {
+        res.json(e);
+    }
+});
+
+// book a place
+accountController.post('/bookingPlace', async (req, res) => {
+
+    if (!req.cookies.token) {
+        res.json({ msg: "User not found" }).status(404);
+    }
+
+    else {
+        const userData = await getUserDataFromReq(req);
+        const {
+            placeId, checkIn, checkOut, numOfGuests, totalPrice
+        } = req.body;
+        Booking.create({
+            placeId, checkIn, checkOut, numOfGuests, totalPrice,
+            userId: userData.id
+        }).then((bookingDoc) => {
+            res.status(200).json(bookingDoc);
+        }).catch((err) => {
+            res.status(400).json(err);
         })
-    });    
- }
+    }
+});
+
+// get all bookings of a user
+accountController.get('/bookings', async (req, res) => {
+    const userData = await getUserDataFromReq(req);
+    res.json(await Booking.find({ userId: userData.id }).populate("placeId"));
+})
+
+
+function getUserDataFromReq(req) {
+    return new Promise((resolve, reject) => {
+        jwt.verify(req.cookies.token, process.env.JWT_SECRET, {}, async (err, userData) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(userData);
+            }
+        });
+    })
+        .catch((error) => {
+            throw error; // Re-throw the error to propagate it further if needed
+        });
+}
+
 
 
 module.exports = accountController
