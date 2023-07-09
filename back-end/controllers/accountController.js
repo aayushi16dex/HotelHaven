@@ -2,7 +2,7 @@ const accountController = require('express').Router()
 const Place = require('../models/placeModel')
 const Booking = require('../models/bookingModel');
 const User = require('../models/userModel')
-const imageDownloader = require('image-downloader');
+const imageDownloader = require('image-downloader'); 
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser');
 accountController.use(cookieParser());
@@ -154,19 +154,20 @@ accountController.get('/bookings', async (req, res) => {
 })
 
 
-function getUserDataFromReq(req) {
-    return new Promise((resolve, reject) => {
-        jwt.verify(req.cookies.token, process.env.JWT_SECRET, {}, async (err, userData) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(userData);
-            }
+async function getUserDataFromReq(req) {
+    try {
+        return await new Promise((resolve, reject) => {
+            jwt.verify(req.cookies.token, process.env.JWT_SECRET, {}, async (err, userData) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(userData);
+                }
+            });
         });
-    })
-        .catch((error) => {
-            throw error; // Re-throw the error to propagate it further if needed
-        });
+    } catch (error) {
+        throw error; // Re-throw the error to propagate it further if needed
+    }
 }
 
 
