@@ -4,6 +4,17 @@ const bcrypt = require('bcrypt')   //password hashing
 const jwt = require('jsonwebtoken')   //authentication
 const cookieParser = require('cookie-parser');
 authController.use(cookieParser());
+const nodemailer = require('nodemailer');
+
+// Create a Nodemailer transporter using a Gmail account
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'your-gmail-account@gmail.com',
+    pass: 'your-gmail-account-password'
+  }
+});
+
 
 // Register
 authController.post('/register', async(req,res) => {

@@ -13,18 +13,15 @@ export default function Login() {
 
     const validateForm = () => {
         const errors = {};
-
         // Required email and password
         if (!email || !password) {
             errors.display = "All fields are required";
         }
-
         setErrors(errors);
-
         // Return true if there are no errors
         return Object.keys(errors).length === 0;
     }
- 
+
     async function loginUser(e) {
         e.preventDefault(); //prevents reloading of page
         if (validateForm()) {
@@ -32,34 +29,34 @@ export default function Login() {
                 await axios.post("/auth/login", {
                     email,
                     password
-                });      
+                });
                 setRedirect(true);
                 fetchUserName();
                 alert("Login successful!");
+
             }
             catch (e) {
-                if (e.response.data.msg === "Invalid credentials"){
+                if (e.response.data.msg === "Invalid credentials") {
                     alert("Invalid credentials!");
                 }
-                else{
+                else {
                     alert("Login failed!")
                 }
                 setEmail("");
                 setPassword("");
             }
         }
-       
+
     }
- 
-    async function fetchUserName(){
-        try{
-            await axios.get('/auth/profile').then(({data}) => {
+
+    async function fetchUserName() {
+        try {
+            await axios.get('/auth/profile').then(({ data }) => {
                 setUser(data);
                 setReady(true);
-                console.log({data});
             });
         }
-        catch(e){
+        catch (e) {
             console.log(e);
         }
     }
@@ -79,15 +76,13 @@ export default function Login() {
                         onChange={ev => setEmail(ev.target.value)}
                         className="placeholder:text-gray-500"
                     />
-                      
+
                     <input type="password"
                         placeholder="Password"
                         value={password}
                         onChange={ev => setPassword(ev.target.value)}
                         className="placeholder:text-gray-500"
                     />
-                    
-                    <Link className="text-sm mt-1 text-gray-600">Forgot password?</Link>
 
                     {errors.display && <div className="text-red-500 mt-2 -mb-2 ml-2">{errors.display}</div>}
 
@@ -99,6 +94,7 @@ export default function Login() {
                 </form>
             </div>
         </div>
+
     );
 
 }
